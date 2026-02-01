@@ -50,6 +50,7 @@ class AlienInvasion:
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
+                self._new_level()
 
             self._update_screen()
             self.clock.tick(60)
@@ -76,9 +77,7 @@ class AlienInvasion:
 
             # Reset the game statistics.
             self.stats.reset_stats()
-            self.sb.prep_score()
-            self.sb.prep_level()
-            self.sb.prep_ships()
+            self.sb.prep_images()
             self.game_active = True
 
             # Get rid of any remaining bullets and aliens.
@@ -140,6 +139,8 @@ class AlienInvasion:
             self.sb.prep_score()
             self.sb.check_high_score()
         
+    def _new_level(self):
+        """Start a new level when the fleet has been destroyed."""
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
