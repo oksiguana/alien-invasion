@@ -1,4 +1,5 @@
 import sys
+import json
 from time import sleep
 
 import pygame
@@ -10,6 +11,8 @@ from button import Button
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+
+from pathlib import Path
 
 class AlienInvasion:
     """Overal class to manage game assets and behavior."""
@@ -54,12 +57,25 @@ class AlienInvasion:
             self._update_screen()
             self.clock.tick(60)
 
+    def _writing_highscore(self):
+        """Write down the high score to the json file."""
+        path = Path('high_score.json')
+        path.write_text(str(self.stats.high_score))
+
+    def reading_high_score(self):
+        """Reading the last high score from the file."""
+        path = Path('high_score.json')
+        contents = path.read_text()
+        self.high_score = json.loads(contents)
+        return self.high_score
+
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self._writing_highscore()
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
@@ -99,6 +115,7 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
+            self._writing_highscore()
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
