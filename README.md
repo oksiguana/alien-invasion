@@ -26,8 +26,8 @@
 1. Clone the repo and change into the project folder:
 
 ```bash
-git clone <your-repo-url>
-cd alien_invasion
+git clone https://github.com/oksiguana/alien-invasion
+cd alien-invasion
 ```
 
 2. (Optional but recommended) Create and activate a virtual environment:
