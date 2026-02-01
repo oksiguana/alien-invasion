@@ -2,6 +2,7 @@
 
 **Alien Invasion** is a small 2D arcade-style game built with Python and Pygame. The player controls a ship, shoots aliens, and tries to get the highest score. This repository contains the game code and assets so you can run and modify the game locally.
 
+![Main menu screenshot](images/main_menu_screenshot.png)
 ---
 
 ## ▶️ Features
