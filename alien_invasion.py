@@ -66,9 +66,12 @@ class AlienInvasion:
     def reading_high_score(self):
         """Reading the last high score from the file."""
         path = Path('high_score.json')
-        contents = path.read_text()
-        self.high_score = json.loads(contents)
-        return self.high_score
+        if path.is_file():
+            contents = path.read_text()
+            self.high_score = json.loads(contents)
+            return self.high_score
+        else:
+            return 0
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
